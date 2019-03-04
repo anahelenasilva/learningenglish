@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { Coracao } from '../shared/coracao.model';
 
 @Component({
@@ -6,7 +6,7 @@ import { Coracao } from '../shared/coracao.model';
   templateUrl: './tentativas.component.html',
   styleUrls: ['./tentativas.component.scss']
 })
-export class TentativasComponent implements OnInit {
+export class TentativasComponent implements OnInit, OnChanges {
 
   public coracoes: Coracao[] = [
     new Coracao(true),
@@ -14,9 +14,22 @@ export class TentativasComponent implements OnInit {
     new Coracao(true)
   ];
 
+  @Input()
+  public tentativas: number;
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges): void {
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    if (this.tentativas >= 0) {
+      if (this.tentativas !== this.coracoes.length) {
+        const indice = this.coracoes.length - this.tentativas;
+        this.coracoes[indice - 1].cheio = false;
+      }
+    }
+
+    console.log('tentativas recebidas do painel: ' + this.tentativas);
   }
 
+  ngOnInit() {}
 }

@@ -18,6 +18,8 @@ export class PainelComponent implements OnInit {
   public rodada = 0;
   public rodadaFrase: Frase;
 
+  public tentativas = 3;
+
   constructor() {
     this.atualizarFraseRodada();
   }
@@ -32,7 +34,7 @@ export class PainelComponent implements OnInit {
     }
 
     if (this.rodadaFrase.frasePtBr === this.resposta) {
-      alert('A resposta está correta!');
+      alert('PARABÉNS! A resposta está correta!');
       this.rodada = this.rodada + 1;
       this.progresso = this.progresso + (100 / this.frases.length);
       console.log(this.progresso);
@@ -41,7 +43,13 @@ export class PainelComponent implements OnInit {
         this.atualizarFraseRodada();
       }
     } else {
-      alert('PARABÉNS! A resposta está incorreta');
+      this.tentativas = this.tentativas - 1;
+
+      if (this.tentativas <= -1) {
+        alert('Você perdeu todas as tentativas :( \n Tente novamente');
+      } else {
+        alert('A resposta está incorreta');
+      }
     }
   }
 
