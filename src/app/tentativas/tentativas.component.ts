@@ -7,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TentativasComponent implements OnInit {
 
-  public coracaoVazio = "/assets/coracao_vazio.png";
-  public coracaoCheio = "/assets/coracao_cheio.png";
+  public coracaoVazio = '/assets/coracao_vazio.png';
+  public coracaoCheio = '/assets/coracao_cheio.png';
 
   constructor() { }
 
