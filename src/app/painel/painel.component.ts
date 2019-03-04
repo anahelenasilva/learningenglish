@@ -39,7 +39,6 @@ export class PainelComponent implements OnInit {
     if (this.rodadaFrase.frasePtBr === this.resposta) {
       this.rodada = this.rodada + 1;
       this.progresso = this.progresso + (100 / this.frases.length);
-      console.log(this.progresso);
 
       if (this.rodada < this.frases.length) {
         this.atualizarFraseRodada();
