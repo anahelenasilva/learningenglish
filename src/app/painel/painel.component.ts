@@ -34,13 +34,14 @@ export class PainelComponent implements OnInit {
     }
 
     if (this.rodadaFrase.frasePtBr === this.resposta) {
-      alert('PARABÉNS! A resposta está correta!');
       this.rodada = this.rodada + 1;
       this.progresso = this.progresso + (100 / this.frases.length);
       console.log(this.progresso);
 
-      if (this.rodada <= this.frases.length) {
+      if (this.rodada < this.frases.length) {
         this.atualizarFraseRodada();
+      } else {
+        alert('PARANÉNS! Você concluiu as traduções com sucesso!');
       }
     } else {
       this.tentativas = this.tentativas - 1;
