@@ -1,5 +1,5 @@
 import { FRASES } from './frases-mock';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Frase } from '../shared/frase.model';
 
 @Component({
@@ -19,6 +19,9 @@ export class PainelComponent implements OnInit {
   public rodadaFrase: Frase;
 
   public tentativas = 3;
+
+  @Output()
+  public encerrarJogo: EventEmitter<string> = new EventEmitter();
 
   constructor() {
     this.atualizarFraseRodada();
@@ -41,15 +44,13 @@ export class PainelComponent implements OnInit {
       if (this.rodada < this.frases.length) {
         this.atualizarFraseRodada();
       } else {
-        alert('PARANÉNS! Você concluiu as traduções com sucesso!');
+        this.encerrarJogo.emit('vitoria');
       }
     } else {
       this.tentativas = this.tentativas - 1;
 
       if (this.tentativas <= -1) {
-        alert('Você perdeu todas as tentativas :( \n Tente novamente');
-      } else {
-        alert('A resposta está incorreta');
+        this.encerrarJogo.emit('derrota');
       }
     }
   }
